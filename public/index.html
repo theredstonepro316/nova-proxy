@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#160d27">
+<title>Nova Proxy</title>
+
+<style>
+:root {
+  --bg:#10091c;
+  --panel:#1b1230;
+  --panel2:#281943;
+  --purple:#9b5cff;
+  --light:#cbb0ff;
+  --text:#f7f1ff;
+  --muted:#a99abf;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  min-height:100vh;
+}
+
+button,input {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+.hidden {
+  display:none!important;
+}
+
+header {
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  border-bottom:1px solid #332349;
+  background:#160d27;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:21px;
+  font-weight:800;
+}
+
+.logo {
+  background:linear-gradient(135deg,#bd83ff,#7234d9);
+  padding:9px;
+  border-radius:12px;
+}
+
+.logo svg {
+  display:block;
+}
+
+.status {
+  color:#bba4df;
+  font-size:12px;
+}
+
+main {
+  max-width:1050px;
+  padding:30px 18px;
+  margin:auto;
+}
+
+.hero {
+  text-align:center;
+  padding:35px 0;
+}
+
+.hero h1 {
+  font-size:clamp(32px,6vw,52px);
+  margin:0 0 12px;
+  background:linear-gradient(90deg,#fff,#b78aff);
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p {
+  color:var(--muted);
+}
+
+.panel {
+  background:var(--panel);
+  border:1px solid #392451;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 15px 50px #0005;
+}
+
+.login {
+  max-width:420px;
+  margin:40px auto;
+}
+
+h2 {
+  margin-top:0;
+}
+
+label {
+  display:block;
+  margin:15px 0 8px;
+  color:var(--light);
+}
+
+input {
+  width:100%;
+  padding:15px;
+  border-radius:10px;
+  border:1px solid #493264;
+  background:#110a1e;
+  color:white;
+  outline:none;
+}
+
+input:focus {
+  border-color:var(--purple);
+}
+
+.primary {
+  border:0;
+  padding:14px 20px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#ad72ff,#7435d1);
+  color:white;
+  font-weight:bold;
+}
+
+.primary:hover {
+  filter:brightness(1.15);
+}
+
+.login .primary {
+  width:100%;
+  margin-top:15px;
+}
+
+.searchbar {
+  display:flex;
+  gap:10px;
+}
+
+.searchbar input {
+  flex:1;
+  min-width:0;
+}
+
+.toolbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
+}
+
+.secondary {
+  border:1px solid #50336d;
+  background:#291a40;
+  color:#e8d9ff;
+  border-radius:9px;
+  padding:10px 15px;
+}
+
+.secondary:hover {
+  background:#382251;
+}
+
+.result {
+  margin-top:22px;
+  min-height:220px;
+}
+
+.result h2 {
+  color:#d4b6ff;
+}
+
+#content {
+  line-height:1.85;
+  overflow-wrap:anywhere;
+  color:#e6ddef;
+}
+
+#links {
+  display:grid;
+  gap:8px;
+  margin-top:20px;
+}
+
+.link {
+  text-align:left;
+  padding:12px;
+  color:#cba5ff;
+  border:1px solid #392451;
+  background:#211532;
+  border-radius:9px;
+}
+
+.message {
+  color:#cbb0ff;
+  margin-top:12px;
+}
+
+footer {
+  text-align:center;
+  padding:30px;
+  color:#766787;
+  font-size:12px;
+}
+
+@media(max-width:550px) {
+  .searchbar {
+    flex-direction:column;
+  }
+
+  .searchbar button {
+    width:100%;
+  }
+
+  header {
+    padding:0 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <span class="logo">
+      <svg width="25" height="25"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2">
+        <circle cx="12" cy="12" r="9"/>
+        <ellipse cx="12" cy="12" rx="4" ry="9"/>
+        <path d="M3 12h18"/>
+      </svg>
+    </span>
+    Nova Proxy
+  </div>
+
+  <span class="status">
+    ● PRIVATE WEB READER
+  </span>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Welcome to Nova.</h1>
+    <p>Your own private space to explore the web.</p>
+  </section>
+
+  <!-- Login -->
+
+  <section id="loginPanel" class="panel login">
+
+    <h2>Welcome back</h2>
+
+    <p style="color:#a99abf">
+      Sign in to access Nova Proxy.
+    </p>
+
+    <form id="loginForm">
+
+      <label for="password">
+        Access password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button class="primary" type="submit">
+        Sign in →
+      </button>
+
+    </form>
+
+    <p id="loginMessage" class="message"></p>
+
+  </section>
+
+  <!-- Browser -->
+
+  <section id="browserPanel" class="hidden">
+
+    <div class="panel">
+
+      <h2>Explore the web</h2>
+
+      <form id="searchForm" class="searchbar">
+
+        <input
+          id="address"
+          placeholder="Enter an approved website or search..."
+          autocomplete="url"
+          required
+        >
+
+        <button class="primary" type="submit">
+          Explore
+        </button>
+
+      </form>
+
+      <div class="toolbar">
+
+        <span class="status">
+          Secure authenticated session
+        </span>
+
+        <button id="logout" class="secondary">
+          Sign out
+        </button>
+
+      </div>
+
+    </div>
+
+    <section class="panel result">
+
+      <h2 id="pageTitle">
+        Ready to explore?
+      </h2>
+
+      <p id="pageUrl" class="status"></p>
+
+      <p id="message" class="message">
+        Enter an approved website or search term above.
+      </p>
+
+      <article id="content"></article>
+
+      <div id="links"></div>
+
+    </section>
+
+  </section>
+
+</main>
+
+<footer>
+  Nova Proxy · Purple Edition · Private access
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function showBrowser() {
+  $("loginPanel").classList.add("hidden");
+  $("browserPanel").classList.remove("hidden");
+}
+
+async function api(path, options = {}) {
+  const response = await fetch(path, {
+    credentials:"same-origin",
+    ...options,
+    headers:{
+      "Content-Type":"application/json",
+      ...options.headers
+    }
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    if (response.status === 401) {
+      $("browserPanel").classList.add("hidden");
+      $("loginPanel").classList.remove("hidden");
+    }
+
+    throw new Error(data.error || "Request failed.");
+  }
+
+  return data;
+}
+
+// Login
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  $("loginMessage").textContent = "Signing in...";
+
+  try {
+    await api("/api/login", {
+      method:"POST",
+      body:JSON.stringify({
+        password:$("password").value
+      })
+    });
+
+    $("password").value = "";
+    $("loginMessage").textContent = "";
+
+    showBrowser();
+
+  } catch (err) {
+    $("loginMessage").textContent = err.message;
+  }
+});
+
+// Website reader
+async function browse(value) {
+  $("message").textContent = "Loading...";
+  $("content").textContent = "";
+  $("links").replaceChildren();
+
+  try {
+    const data = await api(
+      "/api/read?url=" + encodeURIComponent(value)
+    );
+
+    $("pageTitle").textContent = data.title;
+    $("pageUrl").textContent = data.url;
+    $("address").value = data.url;
+    $("message").textContent = "Page loaded successfully.";
+
+    $("content").textContent = data.content;
+
+    for (const item of data.links) {
+      const button = document.createElement("button");
+
+      button.className = "link";
+      button.textContent = item.text || item.url;
+
+      button.addEventListener("click", () => {
+        browse(item.url);
+      });
+
+      $("links").append(button);
+    }
+
+  } catch (err) {
+    $("pageTitle").textContent = "Unable to load page";
+    $("message").textContent = err.message;
+  }
+}
+
+// Search
+$("searchForm").addEventListener("submit", e => {
+  e.preventDefault();
+  browse($("address").value.trim());
+});
+
+// Logout
+$("logout").addEventListener("click", async () => {
+  try {
+    await api("/api/logout", {
+      method:"POST"
+    });
+  } finally {
+    $("browserPanel").classList.add("hidden");
+    $("loginPanel").classList.remove("hidden");
+
+    $("content").textContent = "";
+    $("address").value = "";
+  }
+});
+
+// Restore existing login
+api("/api/me")
+  .then(() => showBrowser())
+  .catch(() => {});
+</script>
+
+</body>
+</html>
