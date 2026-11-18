@@ -1,0 +1,22 @@
+
+services:
+  - type: web
+    name: nova-proxy
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+
+      - key: PROXY_PASSWORD
+        sync: false
+
+      - key: SESSION_SECRET
+        generateValue: true
+
+      - key: ALLOWED_HOSTS
+        value: "example.com,html.duckduckgo.com"
